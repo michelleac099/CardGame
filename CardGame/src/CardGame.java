@@ -15,6 +15,8 @@ public class CardGame {
 		int countC = 0;
 		int countS = 0;
 		boolean winner = false;
+		boolean myWin = false;
+		boolean yourWin = false;
 		
 		//Generating hands
 		for(int i = 0; i<5; i++) {
