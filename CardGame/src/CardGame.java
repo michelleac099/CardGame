@@ -3,111 +3,176 @@ import java.util.Arrays;
 public class CardGame {
 
 	public static void main(String[] args) {
+		
+		Random generator = new Random();
+		int countHeart = 0;
+		int countDiamond = 0;
+		int countClub = 0;
+		int countSpade = 0;
+		int countDraw = 0;
+		int myDraw = 0;
+		int yourDraw = 0;
+		String mySuit = null;
+		String yourSuit = null;
 		int[] myHand = new int[5];
 		int[] yourHand = new int[5];
-		String mySuit = " ";
-		String yourSuit = " ";
-		String drawSuit = " ";
-		Random generator = new Random();
-		int card = 0;
-		int countH = 0;
-		int countD = 0;
-		int countC = 0;
-		int countS = 0;
 		boolean winner = false;
-		boolean myWin = false;
-		boolean yourWin = false;
-		
-		//Generating hands
-		for(int i = 0; i<5; i++) {
-			card = 1 + generator.nextInt(52);
-			myHand[i]=card;
-			System.out.println("My hand: " + myHand[i]);
-			
-			card = 1+generator.nextInt(52);
-			yourHand[i]=card;
-			System.out.println("Your hand: " + yourHand[i]);
-		} //for
-		
-		for (int j = 0; j<5; j++) {
-			if (myHand[j]>=1 && myHand[j]<=13)
-				countH++;
-			else if (myHand[j]>=14 && myHand[j]<=26)
-				countD++;
-			else if (myHand[j]>=27 && myHand[j]<=39)
-				countC++;
-			else if (myHand[j]>=40 && myHand[j]<=52)
-				countS++;			
-		} //for
-		
-		//Setting mySuit
-		if(countH>countD && countH>countC && countH>countS)
-			mySuit = "Hearts";
-		else if (countD>countH && countD>countC && countD>countS)
-			mySuit = "Diamonds";
-		else if (countC>countD && countC>countH && countC>countS)
-			mySuit = "Clubs";
-		else if (countS>countD && countS>countC && countS>countH)
-			mySuit = "Spades";
-		
-		countH=0;
-		countD=0;
-		countC=0;
-		countS=0;
-		
-		for (int j = 0; j<5; j++) {
-			if (yourHand[j]>=1 && yourHand[j]<=13)
-				countH++;
-			else if (yourHand[j]>=14 && yourHand[j]<=26)
-				countD++;
-			else if (yourHand[j]>=27 && yourHand[j]<=39)
-				countC++;
-			else if (yourHand[j]>=40 && yourHand[j]<=52)
-				countS++;
-		}//for
-		
-		//Setting yourSuit
-		if(countH>countD && countH>countC && countH>countS)
-			yourSuit = "Hearts";
-		else if (countD>countH && countD>countC && countD>countS)
-			yourSuit = "Diamonds";
-		else if (countC>countD && countC>countH && countC>countS)
-			yourSuit = "Clubs";
-		else if (countS>countD && countS>countC && countS>countH)
-			yourSuit = "Spades";
+		int mySuitHigh = 0;
+		int mySuitLow = 0;
+		int yourSuitHigh = 0;
+		int yourSuitLow = 0;
+		int yourCount = 0;
+		int myCount = 0;
 
-		System.out.println("My hand has five cards: " + Arrays.toString(myHand));
-		System.out.println("Your hand has five cards: " + Arrays.toString(yourHand));
-		System.out.println("My suit: " + mySuit);
-		System.out.println("Your suit: " + yourSuit);
+		//assigns card values to both hands and determines suit
+		for (int a = 0; a < myHand.length; a++) {
+			myHand[a] = generator.nextInt(52) + 1;
+			if (myHand[a] >= 1 && myHand[a] <= 13) {
+				countHeart++;
+			}
+			else if (myHand[a] >= 14 && myHand[a] <= 26) {
+				countDiamond++;
+			}
+			else if (myHand[a] >= 27 && myHand[a] <= 39) {
+				countClub++;
+			}
+			else if (myHand[a] >= 40 && myHand[a] <= 52) {
+				countSpade++;
+			}
+			if (countHeart >= countDiamond && countHeart >= countClub && countHeart >= countSpade) {
+				mySuit = "Hearts";
+			}
+			else if (countDiamond >= countHeart && countDiamond >= countClub && countDiamond >= countSpade) {
+				mySuit = "Diamonds";
+			}
+			else if (countClub >= countHeart && countClub >= countDiamond && countClub >= countSpade) {
+				mySuit = "Clubs";
+			}
+			else if (countSpade >= countHeart && countSpade >= countClub && countSpade >= countDiamond) {
+				mySuit = "Spades";
+			}
+		}
+		for (int a = 0; a < yourHand.length; a++) {
+			yourHand[a] = generator.nextInt(52) + 1;
+			if (yourHand[a] >= 1 && yourHand[a] <= 13) {
+				countHeart++;
+			}
+			else if (yourHand[a] >= 14 && yourHand[a] <= 26) {
+				countDiamond++;
+			}
+			else if (yourHand[a] >= 27 && yourHand[a] <= 39) {
+				countClub++;
+			}
+			else if (yourHand[a] >= 40 && yourHand[a] <= 52) {
+				countSpade++;
+			}
+			if (countHeart >= countDiamond && countHeart >= countClub && countHeart >= countSpade) {
+				yourSuit = "Hearts";
+			}
+			else if (countDiamond >= countHeart && countDiamond >= countClub && countDiamond >= countSpade) {
+				yourSuit = "Diamonds";
+			}
+			else if (countClub >= countHeart && countClub >= countDiamond && countClub >= countSpade) {
+				yourSuit = "Clubs";
+			}
+			else if (countSpade >= countHeart && countSpade >= countClub && countSpade >= countDiamond) {
+				yourSuit = "Spades";
+			}
+		}
+		System.out.println("My hand has five cards : " + Arrays.toString(myHand) );
 		
-		/*
-		 * Start of game play loop code.
-		 * Win condition: A player has all 5 cards in their hand matching their suit.
-		 */
+		System.out.println("Your hand has five cards : " + Arrays.toString(yourHand) );
 		
-		while(winner=false) {
-			
-			card = 1 + generator.nextInt(52);
-			if (card>=1 && card<=13)
-				drawSuit = "Hearts";
-			else if (card>=14 && card<=26)
-				drawSuit = "Diamonds";
-			else if (card>=27 && card<=39)
-				drawSuit = "Clubs";
-			else if (card>=40 && card<=52)
-				drawSuit = "Spades";
-			
-			if (drawSuit.contentEquals(mySuit))
-				/*
-				 * check my existing cards. If I don’t have that card # add it to my hand.
-				*Add it to my hand by replacing a card that is not in my suit.
-				*/
-				System.out.println("edit this");
-			
-			
-		} //while
+		System.out.println("My suit is " + mySuit + ".");
 		
-	} //main
+		System.out.println("Your suit is " + yourSuit + ".");
+		
+		
+		if (mySuit.equals("Hearts")) 
+			mySuitLow = 1; mySuitHigh = 13;
+		
+		if (mySuit.equals("Diamonds")) 
+			mySuitLow = 14; mySuitHigh = 26;
+		
+		if (mySuit.equals("Clubs")) 
+			mySuitLow = 27;mySuitHigh = 39;
+		
+		if (mySuit.equals("Spades")) 
+			mySuitLow = 40;mySuitHigh = 52;
+		
+		if (yourSuit.equals("Hearts")) 
+			yourSuitLow = 0;yourSuitHigh = 13;
+		
+		if (yourSuit.equals("Diamonds"))
+			yourSuitLow = 14;yourSuitHigh = 26;
+		
+		if (yourSuit.equals("Clubs")) 
+			yourSuitLow = 27;yourSuitHigh = 39;
+			
+		if (yourSuit.equals("Spades"))
+			yourSuitLow = 40;yourSuitHigh = 52;
 
-} //class
+		
+		while (!winner) 
+		{
+			countDraw++;
+			myDraw = generator.nextInt(52) + 1;
+			System.out.println("My draw " + countDraw + ": " + myDraw);
+			
+			yourDraw = generator.nextInt(52) + 1;
+			System.out.println("Your draw " + countDraw + ": " + yourDraw);
+
+			
+			if (myDraw >= mySuitLow && myDraw <= mySuitHigh) 
+			{
+				for (int a = 0; a < 5; a++) 
+				{
+					if (myHand[a] < mySuitLow || myHand[a]> mySuitHigh) 
+						{ myHand[a] = myDraw; break; }
+				}
+						
+						
+			}
+			myCount = 0;
+			for (int b = 0; b < 5; b++) 
+			{
+				if (myHand[b] >= mySuitLow && myHand[b] <= mySuitHigh)
+				{
+					myCount = myCount + 1;
+				}
+			}
+			System.out.println("\tMy new hand is " + Arrays.toString(myHand));
+			if (myCount == 5 )
+					{ winner = true; 
+			System.out.println("I am the winner."); break;}
+			
+			
+			if (yourDraw >= yourSuitLow && yourDraw <= yourSuitHigh) 
+			{
+				for (int a = 0; a < 5; a++) 
+				{
+					if (yourHand[a] < yourSuitLow || yourHand[a]> yourSuitHigh) 
+					{yourHand[a] = yourDraw; break;}
+				}
+						
+						
+			}
+			yourCount = 0;
+			for (int b = 0; b < 5; b++) 
+			{
+				if (yourHand[b] >= yourSuitLow && yourHand[b] <= yourSuitHigh)
+				{
+					yourCount = yourCount + 1;
+				}
+			}
+			System.out.println("\tYour new hand is " + Arrays.toString(yourHand));
+			if (yourCount == 5 )
+					{winner=true; 
+					System.out.println("You are the winner.");break;}
+					}
+		
+			System.out.println("The game is over");
+		}//main
+
+
+	}//class
