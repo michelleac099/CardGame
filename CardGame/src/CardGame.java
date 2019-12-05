@@ -24,7 +24,7 @@ public class CardGame {
 		int yourCount = 0;
 		int myCount = 0;
 
-		//assigns card values to both hands and determines suit
+		//Assigning card values and determining each player's suit
 		for (int a = 0; a < myHand.length; a++) {
 			myHand[a] = generator.nextInt(52) + 1;
 			if (myHand[a] >= 1 && myHand[a] <= 13) {
@@ -113,6 +113,7 @@ public class CardGame {
 			yourSuitLow = 40;yourSuitHigh = 52;
 
 		
+		//Game loop
 		while (!winner) 
 		{
 			countDraw++;
@@ -171,7 +172,7 @@ public class CardGame {
 					System.out.println("You are the winner.");break;}
 					}
 		
-			System.out.println("The game is over");
+			System.out.println("The game is over.");
 		}//main
 
 
